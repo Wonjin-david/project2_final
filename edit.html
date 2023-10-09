@@ -59,8 +59,11 @@
             return false;
         }
 
-        alert("게시물이 추가됩니다");
-        return true;
+        var confirmEdit=confirm("게시물을 수정할까요?");
+
+        if(confirmEdit){
+            return true;
+        }else return false;
     }
     
 </script>
@@ -108,7 +111,7 @@
         생년월일을 입력하세요 : <input type="date" id="birthdate" name="birthdate"><br><br>
         전화번호 : <input type="text" name="phoneNum" id="phoneNum"/><br><br>
         
-        <button type="submit" class="btn btn-success">추가</button>
+        <button type="submit" class="btn btn-success">수정</button>
 
         
 </form>
