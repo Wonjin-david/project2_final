@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+
+<script>
+    function check(){
+        var name=document.getElementById("name");
+        var email=document.getElementById("email");
+        var stuId=document.getElementById("stuId");
+
+        var grade=document.getElementById("grade");
+        var birthdate=document.getElementById("birthdate");
+        var phoneNum=document.getElementById("phoneNum");
+
+        const genderNodeList= document.getElementsByName('gender');
+        
+        if(name.value==""){
+            alert("이름을 입력하세요");
+            return false;
+        }
+
+        if(email.value==""){
+            alert("email을 입력하세요");
+            return false;
+        }
+
+        if(stuId.value==""){
+            alert("학번을 입력하세요");
+            return false;
+        }
+
+  		genderNodeList.forEach((node) => {
+    		if(node.checked)  {
+              document.getElementById('gender').value= node.value;
+            }
+        }) 
+
+        if(grade.value==""){
+            alert("학년을 입력하세요");
+            return false;
+        }
+        if(birthdate.value==""){
+            alert("생일을 입력하세요");
+            return false;
+        }
+
+        if(phoneNum.value==""){
+            alert("전화번호를 입력하세요");
+            return false;
+        }
+
+        alert("게시물이 추가됩니다");
+        return true;
+    }
+    
+</script>
+<body>
+
+
+<form action="/index.html" onsubmit="return addData()" method="get">
+    <legend>개인 정보 입력</legend>
+        이름 : <input type="text" name="name" id="name"/><br><br>
+        이메일 : <input type="text" name="email" id="email"/><br><br>
+        학번 : <input type="text" name="stuId" id="stuId"/><br><br>
+
+        성별 : <input type='radio' name='gender' value='여' onclick='getGender(event)' id="gender" checked/>여성
+        <input type='radio' name='gender' value='남' onclick='getGender(event)'/>남성
+        <br><br>
+        
+        <label for="grade">학년을 선택하세요:</label>
+        <select id="grade" name="grade">
+            <option value="1st">1학년</option>
+            <option value="2nd">2학년</option>
+            <option value="3rd">3학년</option>
+            <option value="4th">4학년</option>
+        </select>
+    
+        <p>선택된 학년: <span id="selectedGrade"></span></p>
+    
+        <script>
+            
+            const selectElement = document.getElementById('grade');
+            const selectedFruitElement = document.getElementById('selectedGrade');
+    
+            selectElement.addEventListener('change', function() {
+                selectedFruitElement.textContent = selectElement.value;
+            });
+        </script>
+
+        생년월일을 입력하세요 : <input type="date" id="birthdate" name="birthdate"><br><br>
+        전화번호 : <input type="text" name="phoneNum" id="phoneNum"/><br><br>
+        
+        <button type="submit" class="btn btn-success">추가</button>
+        
+</form>
+
+<script>
+        function addData() {
+        var ck=check();
+        
+        if(ck==false){
+            return false;
+        }
+
+        // Retrieve input values
+        var studentName = document.getElementById('name').value;
+        var studentEmail = document.getElementById('email').value;
+        var studentStuId = document.getElementById('stuId').value;
+        var studentGender = document.getElementById('gender').value;
+        var studentGrade = document.getElementById('grade').value;
+        var studentBirth = document.getElementById('birthdate').value;
+        var studentPhone = document.getElementById('phoneNum').value;
+
+
+        // Create a data object
+        var newData = {
+            studentName:studentName,
+            studentEmail:studentEmail,
+            studentStuId:studentStuId,
+            studentGender:studentGender,
+            studentGrade:studentGrade,
+            studentBirth:studentBirth,
+            studentPhone:studentPhone
+        };
+
+        // Retrieve existing data from local storage
+        var studentData = JSON.parse(localStorage.getItem('studentData')) || [];
+
+        // Add the new data to the existing array
+        studentData.push(newData);
+
+        // Store the updated data back in local storage
+        localStorage.setItem('studentData', JSON.stringify(studentData));
+
+        // Redirect to index.html to display the updated data
+        window.location.href = 'index.html';
+
+        // Prevent form submission
+        return false;
+    }
+
+</script>
+
+</body>
+</html>
