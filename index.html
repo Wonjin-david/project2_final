@@ -203,7 +203,16 @@
 
         location.reload();
     }
-
+    function onRowClick(studentData) {
+        return function () {
+          // 클릭한 학생의 정보를 JSON 문자열로 변환하여 URL 파라미터로 전달
+          var studentDataJSON = JSON.stringify(studentData);
+          var viewUrl = '/view.html?data=' + encodeURIComponent(studentDataJSON);
+          
+          // view.html 페이지로 이동
+          window.location.href = viewUrl;
+        };
+      }
     function displayData() {
             // Retrieve data from local storage
             var studentData = JSON.parse(localStorage.getItem('studentData')) || [];
@@ -218,19 +227,21 @@
             for (var i = 0; i < studentData.length; i++) {
                 var rowData = studentData[i];
                 var newRow = document.createElement('tr');
+
+                newRow.addEventListener('click',onRowClick(rowData));
                 newRow.innerHTML = `
                     <td class="text-center">${i+1}</td>
-                    <td class="text-center"><a href="/view.html" style="text-decoration: none; color: black">${rowData.studentName}</a></td>
-                    <td class="text-center"><a href="/view.html" style="text-decoration: none; color: black">${rowData.studentEmail}</a></td>
-                    <td class="text-center"><a href="/view.html" style="text-decoration: none; color: black">${rowData.studentStuId}</a></td>
-                    <td class="text-center"><a href="/view.html" style="text-decoration: none; color: black">${rowData.studentGender}</a></td>
+                    <td class="text-center">${rowData.studentName}</td>
+                    <td class="text-center">${rowData.studentEmail}</td>
+                    <td class="text-center">${rowData.studentStuId}</td>
+                    <td class="text-center">${rowData.studentGender}</td>
                 `;
                 tableBody.appendChild(newRow);
             }
-        }
+      }
 
         // Call the displayData function to initially display any existing data
-        displayData();
+      displayData();
 
 </script>
 
