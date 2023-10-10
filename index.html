@@ -52,10 +52,10 @@
                   <thead>
                     <tr class="text-center">
                       <th scope="col">#</th>
-                      <th scope="col"><a href="/view.html" style="text-decoration: none; color: black">이름</a></th>
-                      <th scope="col"><a href="/view.html" style="text-decoration: none; color: black">E-mail</a></th>
-                      <th scope="col"><a href="/view.html" style="text-decoration: none; color: black">학번</a></th>
-                      <th scope="col"><a href="/view.html" style="text-decoration: none; color: black">성별</a></th>
+                      <th scope="col">이름</th>
+                      <th scope="col">E-mail</th>
+                      <th scope="col">학번</th>
+                      <th scope="col">성별</th>
                     </tr>
                   </thead>
                   <tbody id="studentList">
@@ -220,10 +220,10 @@
                 var newRow = document.createElement('tr');
                 newRow.innerHTML = `
                     <td class="text-center">${i+1}</td>
-                    <td class="text-center">${rowData.studentName}</td>
-                    <td class="text-center">${rowData.studentEmail}</td>
-                    <td class="text-center">${rowData.studentStuId}</td>
-                    <td class="text-center">${rowData.studentGender}</td>
+                    <td class="text-center"><a href="/view.html" style="text-decoration: none; color: black">${rowData.studentName}</a></td>
+                    <td class="text-center"><a href="/view.html" style="text-decoration: none; color: black">${rowData.studentEmail}</a></td>
+                    <td class="text-center"><a href="/view.html" style="text-decoration: none; color: black">${rowData.studentStuId}</a></td>
+                    <td class="text-center"><a href="/view.html" style="text-decoration: none; color: black">${rowData.studentGender}</a></td>
                 `;
                 tableBody.appendChild(newRow);
             }
